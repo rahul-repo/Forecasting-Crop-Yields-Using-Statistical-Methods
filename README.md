@@ -120,7 +120,3 @@ Rahul Ganguly contributed to:
 This study demonstrates how statistical and machine learning methods can be applied to agricultural forecasting problems, enabling data-driven insights for yield optimization under varying environmental conditions.
 
 ---
-
-## Author
-
-Rahul Ganguly
