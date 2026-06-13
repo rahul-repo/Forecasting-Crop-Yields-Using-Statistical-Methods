@@ -43,6 +43,16 @@ These variables are used to model and forecast crop yield variations.
 * Heatmap visualization
 * Scatter plots and time-series exploration
 
+
+<p align="center">
+  <img src="Latex/Results%20%26%20Images/Figure%2001_Basic%20statistics%20summary.png" width="700">
+</p>
+
+<p align="center"><b>Figure 1: Basic Statistics Summary</b></p>
+
+![Correlation Heat Map](Latex/Results%20%26%20Images/Figure%2004_Correlation%20Heat%20Map.png)
+
+**Figure 4: Correlation Heat Map**
 ### Predictive Modeling
 
 * Ridge regression (Gaussian regularization)
@@ -84,7 +94,7 @@ README.md
 report.pdf
 Latex/
 Latex/Codes
-
+Latex/Results & Images
 
 ```
 
