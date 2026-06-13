@@ -1,0 +1,335 @@
+\section{Crop Yield Prediction Models}
+
+Crop yield prediction models are crucial for optimizing agricultural practices and ensuring food security. These models help predict crop yields based on various environmental and management factors. We have chosen \textbf{Gaussian Ridge Regression}, which provides a regularized linear approach for predicting crop yield with reduced overfitting and \textbf{Random Forest} which is used for its ability to model complex, non-linear relationships between the features and crop yield, offering robust and accurate predictions.
+
+\subsection{Gaussian Ridge Regression Model for Crop Yield Prediction}
+
+We present the development and evaluation of a Gaussian Ridge Regression Model to predict crop yield based on environmental and agricultural factors. The model was trained on simulated agricultural data including rainfall, temperature, fertilizer usage, pest incidents, and technology index.
+
+\subsubsection{Data Preparation}
+The dataset was prepared with the following variables:
+\begin{itemize}
+    \item Rainfall (mm)
+    \item Average Temperature (°C)
+    \item Fertilizer usage (kg/ha)
+    \item Pest incidents
+    \item Technology Index
+    \item Crop Yield (ton/ha) - Target variable
+\end{itemize}
+
+The year variable was not accounted for as Regression Models can not capture temporal data. The data was split into training (60\%) and testing (40\%) sets to evaluate model performance.
+
+\subsubsection{Model Development}
+Gaussian Ridge Regression, implemented as Bayesian Ridge Regression, is a probabilistic linear regression model that estimates a distribution over weights. It adds L2 regularization and assumes Gaussian priors for coefficients. This helps prevent overfitting, especially in small or noisy datasets, and provides uncertainty estimates along with predictions.\\
+
+In the context of crop yield prediction, Gaussian Ridge Regression (Bayesian Ridge) models the relationship between agricultural inputs—like rainfall, temperature, and pesticide use—and the target variable crop yield. By assuming a Gaussian prior over the regression coefficients, the model incorporates uncertainty into its predictions, making it robust to noise and multicollinearity in real-world agricultural data. This is especially useful when data is limited or contains measurement errors. The regularization prevents overfitting, while the probabilistic framework provides confidence intervals for predictions, helping policymakers or farmers make more informed, data-driven decisions in precision agriculture.
+
+\subsubsection{Model Performance}
+The model achieved the following performance metrics:
+
+\begin{table}[h]
+\centering
+\caption{Evaluation Metrics on Training Datasets}
+\begin{tabular}{lll}
+\toprule
+\textbf{Metric} & \textbf{Value} & \textbf{Interpretation} \\
+\midrule
+RMSE & 0.387 & Root Mean Squared Error \\
+R² & 96.10\% & Model explains 96.10\% of variance\\
+Adjusted R² & 91.6 \%  & Model explains 91.6\% of variance\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[h]
+\centering
+\caption{Evaluation Metrics on Test Dataset}
+\begin{tabular}{lll}
+\toprule
+\textbf{Metric} & \textbf{Value} & \textbf{Interpretation} \\
+\midrule
+RMSE & 0.846 & Root Mean Squared Error \\
+R² & 86.67\% & Model explains 86.67\% of variance\\
+Adjusted R² & 96.5 \%  & Model explains 96.50\% of variance\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsubsection{Results Interpretation}
+The model shows good performance with the following key observations:
+
+\begin{itemize}
+    \item \textbf{Train RMSE: 0.387} \\
+    On average, the model's predictions deviate from the actual crop yield by only 0.387 ton/ha, indicating high accuracy on training data.
+    
+    \item \textbf{Train R$^2$: 96.10\%} \\
+    The model explains 96.10\% of the variability in crop yield within the training set, suggesting an excellent fit to the known data.
+    
+    \item \textbf{Train Adjusted R$^2$: 91.60\%} \\
+    Even after accounting for the number of predictors, the model still explains 91.60\% of the variance, confirming the absence of overfitting due to too many features.
+    
+    \item \textbf{Test RMSE: 0.846} \\
+    The average error in crop yield prediction on unseen data is 0.846 ton/ha. This increase compared to training RMSE is expected and still reasonably low.
+    
+    \item \textbf{Test R$^2$: 86.67\%} \\
+    The model explains 86.67\% of the variation in crop yield on the test set. Although there's a slight performance drop, it remains strong.
+    
+    \item \textbf{Test Adjusted R$^2$: 96.50\%} \\
+    A notably high adjusted R$^2$ on the test set implies the model generalizes well and likely benefits from informative, non-redundant input features.
+\end{itemize}
+
+\subsubsection{Graphical Study of Predicted vs Actual crop Yield}
+
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.8\textwidth]{crop_yield_gaussian_plot.png}
+\caption{Observed vs Predicted Crop Yield}
+\label{fig:obs_pred}
+\end{figure}
+
+The scatter plot below offers a comprehensive graphical evaluation of a Bayesian Ridge (Gaussian) regression model's performance in predicting crop yield. The x-axis represents the actual crop yield (in ton/ha), while the y-axis shows the predicted values generated by the model. The dashed diagonal line signifies an ideal case where predicted values exactly equal actual values (i.e., $y = x$). The closer the points are to this line, the more accurate the predictions.\\
+
+Blue points correspond to the training dataset, while orange points represent predictions on the test set. This color coding enables easy differentiation between in-sample (training) and out-of-sample (test) performance. The majority of training points tightly align with the regression line, indicating high accuracy. The test points also follow the line reasonably well, although with slightly more dispersion, which is typical for unseen data. \\
+
+The largest deviations are generally seen in the lower yield range (below 5 ton/ha), especially in test data. This suggests the model may require refinement in learning patterns associated with low-yield scenarios. Nonetheless, for mid to high-yield ranges, both train and test points closely follow the ideal line, reflecting strong predictive power in those intervals.\\
+
+The visual insights from the plot are further supported by robust quantitative evaluation metrics in Table 1 and 2.
+
+
+The plot and accompanying metrics collectively validate the effectiveness of the Bayesian Ridge model in predicting crop yield. The close alignment of most data points with the ideal regression line—especially in the training set—demonstrates excellent model fit. Meanwhile, the modest increase in error on the test set and still-high $R^2$ values point to good generalization.\\
+
+The model performs especially well in mid to high yield ranges, while slight underperformance at the low end of the spectrum highlights a potential area for further model refinement. Overall, the combination of strong visual and statistical performance indicates that Bayesian Ridge regression is a reliable method for crop yield prediction in this context.\\
+
+
+
+\subsubsection{Feature Contribution Analysis}
+
+After fitting the Bayesian Ridge Regression model, we analyzed the contribution of each feature to the model's Mean Squared Error (MSE). The goal of this analysis was to understand how each feature affects the model's ability to predict crop yield. To ensure a fair comparison, we normalized the MSE contributions by the variance of each feature.
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{|l|c|}
+\hline
+\textbf{Feature} & \textbf{MSE Contribution} \\
+\hline
+Avg Temp (°C) & 3.599122 \\
+Fertilizer (kg/ha) & 0.540140 \\
+Technology Index & 0.355052 \\
+Rainfall (mm) & 0.091410 \\
+Pest Incidents & 0.015407 \\
+\hline
+\end{tabular}
+\caption{Feature Contributions to MSE}
+\end{table}
+
+Here are the results of the feature contribution analysis:
+
+\begin{itemize}
+    \item \textbf{Avg Temp (°C)}: This feature had the highest contribution to the model's MSE, with a value of 3.599122. This suggests that \textit{average temperature} plays a significant role in predicting crop yield. Temperature is a critical factor in agricultural production, influencing growth rates, water requirements, and overall plant health. Therefore, its high MSE contribution indicates its importance in the model.
+    \item \textbf{Fertilizer (kg/ha)}: The \textit{fertilizer} feature had a moderate contribution to the MSE, with a value of 0.540140. Fertilizer is another key input in crop production, affecting soil fertility and plant nutrition. Its contribution to the MSE indicates that it has a notable, though somewhat lesser, impact compared to temperature on the prediction of crop yield.
+    \item \textbf{Technology Index}: The \textit{technology index} feature contributed 0.355052 to the MSE. This suggests that the technology used in farming (such as machinery, techniques, and farming practices) plays a considerable role in determining crop yield, though its influence is lower than temperature and fertilizer. The technology index likely captures the effect of modern farming techniques that can improve yield efficiency.
+    \item \textbf{Rainfall (mm)}: \textit{Rainfall} had a relatively small impact, contributing 0.091410 to the MSE. While rainfall is essential for crop growth, its lower contribution in this case suggests that either it may not vary significantly across the dataset or that its effect on crop yield is mediated by other factors like temperature and fertilizer.
+    \item \textbf{Pest Incidents}: \textit{Pest incidents} had the least contribution to the MSE, with a value of 0.015407. This indicates that pest problems had a minimal effect on the model's ability to predict crop yield. It could imply that pest control measures were adequate across the dataset or that pest-related issues were less variable or less impactful compared to other factors like temperature and fertilizer.
+\end{itemize}
+
+\subsubsection{Conclusion:}
+
+From our analysis, we can conclude that \textit{average temperature} has the highest impact on predicting crop yield, followed by \textit{fertilizer usage} and \textit{technology index}. In contrast, \textit{rainfall} and \textit{pest incidents} have a relatively smaller influence on the model. This suggests that, while all features are important, temperature, fertilizer, and technology play a more significant role in determining crop yield than rainfall and pest incidents in this particular dataset. \\
+
+Additionally, the Gaussian Ridge Regression model has proven to be a good fit for this task. It effectively handles the complexity of the data and regularizes the features through Bayesian priors, ensuring that the predictions remain robust and interpretable. The model's performance in predicting crop yield, as indicated by the high R² and low error metrics, reinforces its suitability for this type of agricultural data analysis. The Bayesian approach in the model further aids in capturing the uncertainties in the data, enhancing the reliability of the predictions.
+
+
+
+
+
+\subsection{Random Forest Model for Crop Yield Prediction}
+
+We present the development and evaluation of a Random Forest model for predicting crop yield based on environmental and agricultural factors. The model was trained on simulated agricultural data including rainfall, temperature, fertilizer usage, pest incidents, and technology index.
+
+\subsubsection{Data Preparation}
+The dataset was prepared with the following variables:
+\begin{itemize}
+    \item Year (as factor)
+    \item Rainfall (mm)
+    \item Average Temperature (°C)
+    \item Fertilizer usage (kg/ha)
+    \item Pest incidents
+    \item Technology Index
+    \item Crop Yield (ton/ha) - Target variable
+\end{itemize}
+
+The data was split into training (80\%) and testing (20\%) sets to evaluate model performance.
+
+\subsubsection{Model Development}
+A Random Forest model was chosen for its ability to handle non-linear relationships and feature importance analysis. Hyperparameter tuning was performed to optimize the model:
+
+\begin{itemize}
+    \item Number of trees (ntree): 500
+    \item Number of variables randomly sampled at each split (mtry): Tuned from 1 to 5
+    \item Best mtry found through 5-fold cross-validation: \textbf{3}
+\end{itemize}
+
+\subsubsection{Model Performance}
+The model achieved the following performance metrics:
+
+\begin{table}[h]
+\centering
+\caption{Evaluation Metrics on Training Datasets}
+\begin{tabular}{lll}
+\toprule
+\textbf{Metric} & \textbf{Value} & \textbf{Interpretation} \\
+\midrule
+RMSE & 1.42 & Root Mean Squared Error \\
+R² & 81.93\% & Model explains 81.93\% of variance\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[h]
+\centering
+\caption{Evaluation Metrics on Test Dataset}
+\begin{tabular}{lll}
+\toprule
+\textbf{Metric} & \textbf{Value} & \textbf{Interpretation} \\
+\midrule
+RMSE & 1.20 & Root Mean Squared Error \\
+R² & 66.02\% & Model explains 66.02\% of variance\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsubsection{Results Interpretation}
+The model shows good performance with the following key observations:
+
+
+\begin{itemize}
+    
+    
+        \item \textbf{Train RMSE = 1.42:} RMSE quantifies the difference between the predicted values and the actual values. A lower value indicates a better fit. In this case, the model's predictions deviate by an average of 1.42 units from the true values.
+        
+        \item \textbf{Train R² = 81.93\% :} R² represents how well the model explains the variability in the data. An R² of 81.93\% suggests that the model explains a high portion of the variance despite minor deviations.
+    
+        \item \textbf{Test RMSE = 1.20:} The RMSE for the test dataset is 1.20, which shows that, on average, the model's predictions deviate from actual values by 1.20 units on the test set. This indicates that the model generalizes well on unseen data, as the RMSE is lower than that of the training dataset.
+        
+        \item \textbf{Test R² = 66.02\%:} With an R² of 66.02\% on the test dataset, the model explains around 66.02\% of the variance in the crop yield predictions on unseen data. This reflects that despite slight variations, the model's predictions are still moderately close to actual values, showing decent generalization though it is certainly overfitted.
+    
+    
+    
+        \item \textbf{Overfitting} The model performs moderately on unseen data with an R² of 66.02\% and an RMSE of 1.20, which suggests that it is over fitted on the training data hence there is room for improvement in capturing more variance by reducing the hypermateres or increasing training data size.
+    
+\end{itemize}
+
+
+
+\subsubsection{Observed vs Predicted Crop Yield (Figure \ref{fig:obs_pred})}
+The following observed vs predicted plot is added to identify systematic prediction errors across the yield distribution and to compare performance between training (in-sample) and test (out-of-sample) datasets.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.8\textwidth]{Prediction Visualisation.jpeg}
+\caption{Observed vs Predicted Crop Yield}
+\label{fig:obs_pred}
+\end{figure}
+
+
+The Observed vs Predicted plot compares the actual crop yields with the model's predictions:
+
+\begin{itemize}
+  \item \textbf{Axes}:
+  \begin{itemize}
+    \item \textbf{X-axis (Observed Yield)}: Measured crop yield values from field data (ton/ha)
+    \item \textbf{Y-axis (Predicted Yield)}: Model-predicted yield values (ton/ha)
+  \end{itemize}
+  
+  \item \textbf{Reference Line}:
+  \begin{itemize}
+    \item \textcolor{red}{Red dashed line}: Ideal prediction line ($\hat{y} = y$)
+    \item Points above the line indicate under-prediction ($\hat{y} < y$)
+    \item Points below the line indicate over-prediction ($\hat{y} > y$)
+  \end{itemize}
+  
+  \item \textbf{Data Markers}:
+  \begin{itemize}
+    \item \textcolor{blue}{Blue circles}: Training set ($R^2 = 81.93\%$)
+    \item \textcolor{green}{Green circles}: Test set ($R^2 = 66.02\%$)
+  \end{itemize}
+\end{itemize}
+
+\textbf{Interpretation}
+The plot visualizes the performance of the Random Forest model across the entire dataset. Key observations:
+
+\begin{itemize}
+  \item \textbf{Overall Trend}: 
+  Points cluster around the red line ($y = x$), indicating the model generally predicts yields close to observed values. However, slight deviations suggest room for improvement.
+
+  \item \textbf{Training vs. Test Performance}:
+  \begin{itemize}
+    \item \textbf{Training Set (Blue)}: Points are tightly clustered, showing high accuracy ($R^2 = 81.93\%$). This is expected since the model was trained on this data.
+    \item \textbf{Test Set (Green)}: Slightly more scattered, reflecting the model's generalization capability ($R^2 = 66.02\%$). The spread indicates minor overfitting.
+  \end{itemize}
+
+  \item \textbf{Systematic Bias}:
+  \begin{itemize}
+    \item \textbf{Under-Prediction}: Points above the red line (observed $>$ predicted) for yields $\geq 8$ ton/ha suggest the model underestimates higher yields.
+    \item \textbf{Over-Prediction}: Points below the line (observed $<$ predicted) at lower yields ($< 8$ ton/ha) indicate overestimation in this range.
+  \end{itemize}
+\end{itemize}
+
+\subsubsection{Variable Importance Analysis (Figure \ref{fig:var_imp})}
+
+The Random Forest model provides insight into which factors most influence crop yield.
+
+\begin{center}
+\begin{minipage}{\textwidth}
+\centering
+\includegraphics[width=0.8\textwidth]{Variable imp.jpeg}
+\captionof{figure}{Variable Importance Plot}
+\label{fig:var_imp}
+\end{minipage}
+\end{center}
+The importance plot (Figure \ref{fig:var_imp}) shows:
+The graph displays the variable importance measures from a Random Forest regression model named \texttt{rf\_model\_optimized}. Two different metrics are shown for evaluating the importance of each predictor variable:
+
+\begin{enumerate}[label=\textbf{\arabic*.}]
+    \item \textbf{\%IncMSE (Percentage Increase in Mean Squared Error)}\\
+    This metric measures the increase in the model's prediction error (Mean Squared Error) when the values of a particular variable are randomly permuted. A higher \%IncMSE implies that the variable is more important to the model's predictive accuracy.
+
+    \item \textbf{IncNodePurity (Increase in Node Purity)}\\
+    This measures the total decrease in node impurity (usually residual sum of squares for regression) that results from splits on the variable across all trees. Higher values indicate greater contribution to improving prediction purity in the decision trees.
+\end{enumerate}
+
+\subsubsection*{Key Observations}
+\begin{itemize}
+    \item \textbf{Avg\_Temp\_C (Average Temperature in °C)} is the most important variable according to both \%IncMSE and IncNodePurity, indicating that it is the most influential predictor in the model.
+    
+    \item \textbf{Pest\_Incidents} and \textbf{Rainfall\_mm} are moderately important, meaning they contribute significantly to the model's predictions but less than average temperature.
+    
+    \item \textbf{Fertilizer\_kg\_ha} and \textbf{Technology\_Index} have the lowest importance scores, suggesting that their contribution to the model's predictive power is minimal.
+\end{itemize}
+
+\newline
+The Random Forest model relies heavily on \texttt{Avg\_Temp\_C} for accurate predictions. \texttt{Pest\_Incidents} and \texttt{Rainfall\_mm} also provide valuable information, while \texttt{Fertilizer\_kg\_ha} and \texttt{Technology\_Index} are relatively less important. These results can guide feature selection and model simplification efforts.
+
+
+\subsubsection{Conclusion}
+The Random Forest model developed provides a reasonably accurate prediction of crop yields, explaining 66\% of the variance in test data. Key findings include:
+
+\begin{itemize}
+    \item The model can be useful for yield estimation and agricultural planning
+    \item Technology Index and Fertilizer usage appear to be important predictors
+    \item Further improvements could be made by:
+    \begin{itemize}
+        \item Collecting more data
+        \item Trying other ensemble methods
+        \item Incorporating additional relevant features
+    \end{itemize}
+\end{itemize}
+
+This model serves as a solid foundation for agricultural yield prediction and decision support systems.
+
+\subsection{Comparison between the two Models}
+
+The Gaussian Ridge Regression Model performs better than the Random Forrest Model which indicates the data containing a strong linear pattern. Both models agree that human factors like Fertilizer an Technology Index play an important role in crop yield prediction. Hence in the next section, we are going to optimize the human factors to get the optimal/desired crop yield.
+
+
