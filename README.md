@@ -103,8 +103,9 @@ These variables are used to model and forecast crop yield variations.
 ## Repository Structure
 
 ```text id="f3k9lm"
+Agri Presentation.pptx
+Agri_project_model_fitting.pdf
 README.md
-report.pdf
 Latex/
 Latex/Codes
 Latex/Results & Images
