@@ -48,21 +48,34 @@ These variables are used to model and forecast crop yield variations.
   <img src="Latex/Results%20%26%20Images/Figure%2001_Basic%20statistics%20summary.png" width="700">
 </p>
 
-<p align="center"><b>Figure 1: Basic Statistics Summary</b></p>
-
 ![Correlation Heat Map](Latex/Results%20%26%20Images/Figure%2004_Correlation%20Heat%20Map.png)
 
-**Figure 4: Correlation Heat Map**
+
+![Yield vs Pest Incidents](Latex/Results%20%26%20Images/Figure%2008_Scatter%20plot%20of%20Yield%20vs%20Pest%20Incidents.png)
+
+
+![Average Temperature Time Series](Latex/Results%20%26%20Images/Figure%2014_Time%20series%20plot%20for%20avg%20temp.png)
+
+
 ### Predictive Modeling
 
 * Ridge regression (Gaussian regularization)
 * Random forest regression
 * Time-series based forecasting methods
 
+
+
+![Observed vs Predicted Crop Yield](Latex/Results%20%26%20Images/Figure%2016_Observed%20vs%20Predicted%20Crop%20Yield.png)
+
+
+![Observed vs Predicted Crop Yield](Latex/Results%20%26%20Images/Figure%2017_Observed%20vs%20Predicted%20Crop%20Yield.png)
+
 ### Optimization
 
 * Bayesian optimization for yield maximization
 * Identification of optimal agricultural input combinations
+* 
+![Bayesian Optimization Convergence](Latex/Results%20%26%20Images/Figure%2019_Bayesian%20Optimization%20Convergence.png)
 
 ---
 
