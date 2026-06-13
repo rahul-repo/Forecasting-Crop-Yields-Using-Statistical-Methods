@@ -1,0 +1,305 @@
+\section{Exploratory Analysis}
+To understand the underlying structure and distribution of our dataset, we conducted a detailed exploratory data analysis. The analysis includes summary statistics, visualizations (scatterplots, heatmap), and correlation analysis.
+\subsection{Descriptive Statistics}
+We have computed basic descriptive statistics (mean, median, range, SD) for each of the variables like Rainfall (mm) , Avg Temp (\degree C) , Fertilizer (kg/ha), Pest Incidents , Technology Index , 	Crop Yield (ton/ha). Now let us have a look into it.
+
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=1\linewidth]{Screenshot 2025-04-15 134414.png}
+    \caption{Basic statistics summary}
+    \label{fig:enter-label}
+\end{figure}
+
+Looking into the above table the following basic things we can say about the data set : 
+\begin{itemize}
+   
+
+ \item Moderately high variability in all of the variables implies that none of the variables are remotely stable with time.
+
+ \item Pest incident is the only positively skewed factor(apart from temperature) suggesting the variability is caused mainly by few years when the pest incidents are at their peak.
+
+
+ \item High range in Technology Index shows the improvement of its implementation in agriculture with time.
+
+
+ \item Rainfall varies significantly with a high range and being an important factor in crop yield is worth studying.
+
+
+ \item Temperature on the other hand has a lower variance and range compared to Rainfall. So it can definitely be considered a more stable natural factor. 
+ 
+\end{itemize}
+\subsection{Correlation with Crop Yield}
+
+First have a look into the result for Pearson correlation coefficient between crop yield and all other variable one by one. 
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width= 1.2\linewidth]{Screenshot 2025-04-15 142653.png}
+    \caption{Correlation}
+    \label{fig:enter-label}
+\end{figure}
+
+\textbf{\underline{INSIGHTS}}:- 
+
+\vspace{1 mm}
+\begin{itemize}
+\item Very high negative correlation between Temp and Yield implies temperature and global warming as a important factor affecting agriculture
+
+\item Moderately high and positive linear link between Crop yield and Fertlizer used as well as Technology suggest that these two factors require proper attention for maximising agricultural progress.
+
+\item A high positive correlation with Rainfall tells us importance of rainfall, the main source of irrigation in agriculture
+\end{itemize}
+
+\subsubsection{Correlation Matrix}
+
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=1\linewidth]{Screenshot 2025-04-15 143434.png}
+    \caption{Correlation Matrix}
+    \label{fig:enter-label}
+\end{figure}
+
+\subsubsection{Heat Map}
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=1\linewidth]{Screenshot 2025-04-15 145845.png}
+    \caption{Correlation Heat Map}
+    \label{fig:enter-label}
+\end{figure}
+
+\textbf{\underline{INSIGHTS}}:- 
+
+\vspace{1 mm}
+\begin{itemize}
+    
+\item Rainfall seems to have a strong positive correlation with both Fertilizer used and Technology Index in the agricultural model. The former might be because more rainfall implies more waste of fertlizers by leaching or run-off.
+
+\item Fertilizer and Technology Index both has a high negative correlation with Pest Incidents which is pretty self-explanatory.
+
+\item Technology Index and Fertilizer has a very strong positive correlation which suggests that farmers tend to invest in Fertilizers and Technology side by side and improving them almost equally.
+
+\item Rainfall and Temperature has a moderately high negative correlation which is expected.
+\end{itemize}
+\subsection{Scatter Plot}
+
+Now we are looking into the following scatter plot : -
+
+\vspace{1 mm}
+\hspace{-5 mm}i) Scatter plot for Yield Vs Rainfall
+
+\vspace{1 mm}
+\hspace{-5 mm}ii) Scatter plot for Yield Vs Avg Temp
+
+\vspace{1 mm}
+\hspace{-5 mm}iii) Scatter plot of Yield vs Fertilizer
+
+\vspace{1 mm}
+\hspace{-5 mm}iv) Scatter plot for Yield Vs Pest incidents
+
+\vspace{1 mm}
+\hspace{-5 mm}v) Scatter plot for Yield Vs Technology index
+
+\vspace{1 mm}
+\hspace{-5 mm}We then discuss some basic insights from the scatter plots.
+
+\vspace{10 mm}
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.75\linewidth]{Screenshot 2025-04-15 151149.png}
+    \caption{Scatter plot of Yield vs Rainfall}
+    \label{fig:enter-label}
+\end{figure}
+\textbf{\underline{INSIGHTS}}:- 
+
+ \begin{itemize}
+ 
+ \item As rainfall increases, the crop yield also increases, which is shown by the upward trend and the fitted blue regression line.
+
+\item This suggests that rainfall plays a significant role in boosting agricultural productivity — likely because water is a key input in crop growth.
+\end{itemize}
+
+\newpage
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.75\linewidth]{Screenshot 2025-04-15 152707.png}
+    \caption{Scatter plot of Yield vs Avg Temp}
+    \label{fig:enter-label}
+\end{figure}
+
+\textbf{\underline{INSIGHTS}}:- 
+
+\begin{itemize}
+\item The blue regression line slopes downward, indicating that higher temperatures are associated with lower yields.
+
+\item This makes sense agriculturally:
+
+i) High temperatures can cause heat stress in crops.
+
+ii) It increases evapotranspiration, drying out soil moisture faster.
+\end{itemize}
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.75\linewidth]{Screenshot 2025-04-15 153249.png}
+    \caption{Scatter plot of Yield vs Fertilizer}
+    \label{fig:enter-label}
+\end{figure}
+
+\textbf{\underline{INSIGHTS}}:- 
+
+\begin{itemize}
+    
+\item The blue regression line shows an upward trend, indicating that increasing fertilizer tends to increase yield.
+
+\item However, there's more scatter around the line compared to the rainfall plot, which means:
+
+i) The effect of fertilizer on yield is less consistent.
+
+ii) Overuse of fertilizer could lead to negative effects, possibly explaining some of the outliers.
+\end{itemize}
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.75\linewidth]{Screenshot 2025-04-15 153614.png}
+    \caption{Scatter plot of Yield vs Pest incidents}
+    \label{fig:enter-label}
+\end{figure}
+\textbf{\underline{INSIGHTS}}:- 
+
+\vspace{1 mm}
+
+\begin{itemize}
+\item The blue regression line slopes downward, confirming the overall negative trend.
+
+\item Pest control alone isn't sufficient to ensure high productivity.
+\end{itemize}
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.75\linewidth]{Screenshot 2025-04-15 154617.png}
+    \caption{Scatter plot of Yield vs Technology Index}
+    \label{fig:enter-label}
+\end{figure}
+
+\textbf{\underline{INSIGHTS}}:- 
+\vspace{1 mm}
+
+\begin{itemize}
+\item The blue regression line slopes upward, showing a strong positive linear trend.
+
+\item Investment in agricultural technology (like irrigation systems) pays off in terms of higher yield.
+\end{itemize}
+
+\subsection{Partial Correlation}
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.75\linewidth]{Screenshot 2025-04-15 144100.png}
+    \caption{Partial correlation with crop yield}
+    \label{fig:enter-label}
+\end{figure}
+
+\textbf{\underline{INSIGHTS}}:- 
+
+\vspace{1 mm}
+\begin{itemize}
+    \item Controlling temperature, partial correlation between yield and rainfall is 0.390 which is significantly less than their linear correlation. That can be explained as temperature and rainfall has a moderately negative correlation between them.
+
+\item Now keeping rainfall constant and doing it with temp, the value is -0.875 which is a slight decrease in magnitude from their individual correlation. This leads to the conclusion that temperature is a more important factor than rainfall if we want to explain the linear variability of Crop yield subject to linear variation of these variables.
+
+\item Technology Index and Fertilizers being highly correlated, we did the same partial correlation calculation with them too.
+
+\item Technology and Crop Yield controlling Fertilizer shows almost no correlation ie linear independence. So it might be that they are related with some non-linear function. On the other hand the correlation strength between Fertilizer and Yield shows a moderate decline which tells Technology has some effect in the initial correlation between them.
+
+\end{itemize}
+\subsection{ Multiple Linear Regression with Crop Yield as dependent variable and others as independent variable}
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.65\linewidth]{Screenshot 2025-04-15 180013.png}
+    \caption{Residuals(deviation from fit)}
+    \label{fig:enter-label}
+\end{figure}
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.75\linewidth]{Screenshot 2025-04-15 173216.png}
+    \caption{Multiple Linear Regression}
+    \label{fig:enter-label}
+\end{figure}
+
+\begin{itemize}
+  \item \textbf{Multiple R-squared:} 0.9339
+  \item \textbf{Adjusted R-squared:} 0.9165
+\end{itemize} 
+
+
+
+\subsection{Time series graph}
+We have plotted three time series graph for total crop yield , amount of rainfall , avg temperature over the years from 2000 to 2024. Let's have a look in it and discuss what can we say from these graphs.
+
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.67\linewidth]{Screenshot 2025-04-11 143416.png}
+    \caption{Time series plot for crop yield}
+    \label{fig:enter-label}
+\end{figure}
+
+\subsubsection{Some Observations from the Crop Yield time series graph}
+
+1) \textbf{\textcolor{blue}{High Variability}:} Crop yield fluctuates significantly from year to year, ranging between approximately 3 to 10 tons per hectare, indicating sensitivity to varying conditions.
+
+\vspace{2 mm}
+\hspace{-5 mm}2) \textbf{\textcolor{blue}{No Clear Trend}: }There is no obvious long-term increase or decrease. However, the yields show short-term peaks and dips, possibly linked to environmental or agricultural factors.
+
+\vspace{2 mm}
+\hspace{-5 mm}3) \textbf{\textcolor{blue}{Low Yield Years}}: Major drops are seen around 2009, 2012, 2014, 2020, and 2023, where yields fall close to or below 4 tons/ha.
+
+\vspace{2 mm}
+\hspace{-5 mm}4) \textbf{\textcolor{blue}{High Yield Years}:} Peaks occur around 2001, 2004, 2008, 2013, and 2024, with 2024 marking one of the highest yields, nearly reaching 10 tons/ha.
+
+\vspace{2 mm}
+\hspace{-5 mm}5) \textbf{\textcolor{blue}{Potential Recovery in 2024}:} Despite previous dips, crop yield in 2024 shows a strong recovery, suggesting improved conditions or interventions.
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.67\linewidth]{Time series of avg Temp.png}
+    \caption{Time series plot for avg temp}
+    \label{fig:enter-label}
+\end{figure}
+
+\subsubsection{Some Observations from the avg temp time series graph}
+
+\vspace{2 mm}
+1) \textbf{\textcolor{blue}{Fluctuating Pattern}:} The average temperature varies significantly year by year, ranging mostly between 21°C and 35°C, showing no consistent upward or downward trend.
+
+\vspace{2 mm}
+\hspace{-5 mm}2) \textbf{\textcolor{blue}{Highs and Lows}:}
+Peaks around 2005, 2012, 2015, 2017 and 2021 (close to or slightly above 35°C).
+Lows around 2004, 2008, 2013, 2019, and 2024 (dropping near or below 22°C).
+
+\vspace{2 mm}
+\hspace{-5 mm}3) \textbf{\textcolor{blue}{No Strong Warming Trend}: }Despite climate concerns, this data does not show a steady increase in temperature over time—variability dominates instead of a clear warming signal.
+
+\vspace{2 mm}
+\hspace{-5 mm}4) \textbf{\textcolor{blue}{Sharp Drop in 2024}: }The year 2024 recorded one of the lowest average temperatures in the entire dataset.
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.67\linewidth]{Time series of rainfall.png}
+    \caption{Time series plot for rainfall}
+    \label{fig:enter-label}
+\end{figure}
+
+\subsubsection{Some Observations from the rainfall time series graph}
+1) \textbf{\textcolor{blue}{Fluctuating Trend}:} Rainfall shows significant year-to-year variation, indicating a highly fluctuating pattern without a clear long-term increasing or decreasing trend.
+
+\vspace{2 mm}
+\hspace{-5 mm}2) \textbf{\textcolor{blue}{No Strong Trend}: }There is no consistent upward or downward trajectory, which means rainfall has not significantly increased or decreased over the 25-year period.
+
+\vspace{2 mm}
+\hspace{-5 mm}3) \textbf{\textcolor{blue}{Peaks and Lows}:}
+
+    Rainfall peaked around 2001, 2008, 2011,2013, 2016, and 2024  (values around 1400–1500 mm).
+
+    The lowest points were around 2004, 2009, 2014, and 2020 (values around 700–800 mm).
