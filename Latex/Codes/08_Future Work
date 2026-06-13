@@ -1,0 +1,6 @@
+\section{Future Work}
+
+In the future, this work can be improved by collecting more recent and detailed data to make predictions more accurate. Including information from different regions or states could help the model understand local patterns better. Simple weather forecasts can also be added to improve future yield estimates. Another useful step would be to build a basic mobile or web app so that farmers or policymakers can easily input values and get suggestions. Lastly, testing these models in real farms and comparing the predicted results with actual outcomes would help improve and trust the system more.
+These directions aim to enhance the robustness, interpretability, and practical relevance of crop yield forecasting systems.
+
+
