@@ -1,0 +1,147 @@
+\section{Prediction of Human Factors for Optimal/Desired Crop Yield}
+
+The first step to get optimal crop yield is to understand the influence of the various factors influencing it as addressed in the previous section. However to get optimal crop yield we need to optimize the factors under our direct control (like Technology Index and Fertilizer) i.e \textbf{human factors} with respect to \textbf{environmental factors} like rainfall, pest incidents and temperature. We present the solution of the above problem in the following two ways:
+
+\begin{itemize}
+    \item Training a Gaussian Ridge Regression Model with the target variable Technology or Fertilizer and finding out the optimal value of human factors given desired crop yield and fore-casted environmental factors.
+    \item Assuming an Expenditure to be a linear function of human factors and finding optimal crop yield based on the constraint expenditure $\leq C$
+\end{itemize}
+
+\subsection{Optimal Human factors for Desired Crop Yield}
+
+This report presents a Gaussian Ridge Regression approach to obtain the desired crop yield by optimally allocating resources between fertilizer application and technology investment, given environmental constraints.
+
+\subsubsection{Technological Index Model}
+
+We have fitted a Gaussian Ridge Regression Model with Technological Index as the target variable. This helps us to predict the amount of technology integration we need to get our desired crop yield in the future years with fore-casted environmental factors data. \\
+
+\noindent Our Model has the following evaluation metrics:
+
+\begin{table}[h]
+\centering
+\caption{Evaluation Metrics on Training Datasets}
+\begin{tabular}{lll}
+\toprule
+\textbf{Metric} & \textbf{Value} & \textbf{Interpretation} \\
+\midrule
+RMSE & 3.744 & Root Mean Squared Error \\
+R² & 95.9\% & Model explains 95.9\% of variance\\
+Adjusted R² & 86.2 \%  & Model explains 86.2\% of variance\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[h]
+\centering
+\caption{Evaluation Metrics on Test Dataset}
+\begin{tabular}{lll}
+\toprule
+\textbf{Metric} & \textbf{Value} & \textbf{Interpretation} \\
+\midrule
+RMSE & 12.805 & Root Mean Squared Error \\
+R² & 57.2\% & Model explains 57.2\% of variance\\
+Adjusted R² & 81.5 \%  & Model explains 81.50\% of variance\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The evaluation metrics suggest that the model demonstrates strong predictive capabilities, with particularly impressive performance in one of the test scenarios. In the first case, a low RMSE of 3.744 and a high R² of 95.9 \% indicate that the model captures nearly all of the variance in the target variable, reflecting high accuracy and excellent fit. The Adjusted R² of 86.2\% further confirms that this performance is robust even when accounting for model complexity. In the second scenario, while the RMSE rises to 12.805 and the R² decreases to 57.2\%, the Adjusted R² remains high at 81.5\%, suggesting that the underlying model structure still holds strong explanatory power. However, this difference in behavior on the test and training datasets indicates that the training data did not follow a strong linear pattern and hence a non linear model like random forest would be a better choice. 
+
+\subsubsection{Fertilizer Model}
+
+We have fitted a Gaussian Ridge Regression Model with Fertilizer (kg/ha) as the target variable. This helps us to predict the amount of fertilizer required to get our desired crop yield in the future years with fore-casted environmental factors data. \\
+
+\noindent Our Model has the following evaluation metrics:
+
+\begin{table}[h]
+\centering
+\caption{Evaluation Metrics on Training Datasets}
+\begin{tabular}{lll}
+\toprule
+\textbf{Metric} & \textbf{Value} & \textbf{Interpretation} \\
+\midrule
+RMSE & 15.72 & Root Mean Squared Error \\
+R² & 92.5\% & Model explains 92.5\% of variance\\
+Adjusted R² & 87.2 \%  & Model explains 87.2\% of variance\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[h]
+\centering
+\caption{Evaluation Metrics on Test Dataset}
+\begin{tabular}{lll}
+\toprule
+\textbf{Metric} & \textbf{Value} & \textbf{Interpretation} \\
+\midrule
+RMSE & 37.029 & Root Mean Squared Error \\
+R² & 57.5\% & Model explains 57.5\% of variance\\
+Adjusted R² & 86.1 \%  & Model explains 86.1\% of variance\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The evaluation metrics reflect a model with strong learning capacity on the training data and reasonable generalization to the test data. On the training set, the model achieves a low RMSE of 15.72 and a high R² of 92.5\%, indicating it captures the majority of the variance in the data with high accuracy. The Adjusted R² of 87.2\% suggests that the model's complexity is well-balanced, effectively utilizing relevant predictors. When evaluated on the test set, although the RMSE increases to 37.029 and R² drops to 57.5\%, the Adjusted R² remains high at 86.1\%. This suggests that while the prediction error rises—possibly due to variability or noise in the unseen data—the model retains a solid structure and continues to explain a substantial portion of the variance. Overall, the model shows strong training performance and promising generalization, with room for further refinement to enhance accuracy on new datasets.
+
+\subsubsection{Drawbacks and Further Improvement}
+
+While our models fit reasonably well, it is important to note that human factors are not in our explicit control. Also, more fertilizer and technology integration often comes at a cost and various other constraints like scale, specific need of plant and availability. However our model does not account for these factors. Hence we have developed the Bayesian Optimization for Crop Yield Maximization model with defines the expenditure associated with fertilizer and technology integration as a linear function of the above and tries to maximize crop yield by restricting the expenditure by an upper bound called Budget.  
+
+
+
+\subsection{Bayesian Optimization for Crop Yield Maximization}
+
+This report presents a Bayesian optimization approach to maximize crop yield by optimally allocating resources between fertilizer application and technology investment, given environmental constraints and a fixed budget.
+
+\subsubsection{Problem Definition}
+Given historical agricultural data with the following variables:
+\begin{itemize}
+    \item Controllable inputs: Fertilizer (kg/ha), Technology Index
+    \item Uncontrollable inputs: Rainfall (mm), Average Temperature (°C), Pest Incidents
+    \item Output: Crop Yield (ton/ha)
+    \item Constraint: Expenditure = $2 \times \text{Fertilizer} + 5 \times \text{Technology Index} \leq \text{Budget}$
+\end{itemize}
+
+\subsubsubsection{Expenditure Variable}
+The expenditure variable is calculated as:
+\begin{equation}
+    \text{Expenditure} = 2 \times \text{Fertilizer (kg/ha)} + 5 \times \text{Technology Index}
+\end{equation}
+
+This formulation reflects:
+\begin{itemize}
+    \item Fertilizer costs 2 units per kg/ha
+    \item Technology improvements cost 5 units per index point
+    \item The total expenditure cannot exceed the available budget
+\end{itemize}
+
+\subsubsection{Methodology}
+We employ Bayesian optimization with the following components:
+
+\subsubsection{Random Forest Model}
+The predictive model achieved:
+\begin{itemize}
+    \item 81.93\% variance explained
+    \item RMSE: 1.4205
+    \item R-squared: 0.6602
+\end{itemize}
+
+Variable importance analysis showed that all included factors contribute significantly to yield prediction.
+
+\subsubsubsection{Bayesian Optimization Setup}
+The optimization problem is formulated as:
+\begin{equation}
+    \begin{aligned}
+    & \underset{\text{Fertilizer, Tech Index}}{\text{maximize}}
+    & & \text{Predicted Yield}(\text{Fertilizer}, \text{Tech Index} | \text{Rainfall}, \text{Temp}, \text{Pest}) \\
+    & \text{subject to}
+    & & 2 \times \text{Fertilizer} + 5 \times \text{Tech Index} \leq \text{Budget} \\
+    & & & \text{Fertilizer} \geq 0, \text{Tech Index} \geq 0
+    \end{aligned}
+\end{equation}
+
+\subsubsection{Discussion}
+So we use this Bayesian Optimisation setup to check if any other combination of fertilizer use and Technology Index level can have more yield for a farmer. The limit to Expenditure is provided to make sure the best yield result obtained is economically sustainable as well.
+
+
+
