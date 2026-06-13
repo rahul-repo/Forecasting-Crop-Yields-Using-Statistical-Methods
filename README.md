@@ -82,10 +82,10 @@ These variables are used to model and forecast crop yield variations.
 ```text id="f3k9lm"
 README.md
 report.pdf
-presentation.pdf
+Latex/
+Latex/Codes
 
-datasets/
-code/
+
 ```
 
 ---
@@ -96,7 +96,7 @@ This project was completed as a group academic project under faculty supervision
 
 ### Authors
 
-* Rahul Ganguly
+* Rahul Ganguly (B.Stat ISI Kolkata)
 * [Other authors as listed in the project report]
 
 ---
